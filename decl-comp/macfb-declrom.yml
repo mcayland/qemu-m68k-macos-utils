@@ -1,0 +1,87 @@
+#
+# sResources for DAFB framebuffer
+#
+# Written by Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+#
+
+# Board resource
+- id: 0x1
+  type: ResourceList
+  resources:
+    - id: sRsrcType
+      type: RsrcType
+      data:
+        category: 0x1
+        cType: 0x0
+        drSW: 0x0
+        drHw: 0x0
+
+    - id: sRsrcName
+      type: String
+      data: "QEMU DAFB Board"
+
+    - id: BoardId
+      type: InlineWord
+      data: 0x514d        # "QM"
+
+    - id: VendorInfo
+      type: ResourceList
+      resources:
+        - id: VendorID
+          type: String
+          data: "QEMU"
+
+        - id: SerialNum
+          type: String
+          data: "1.0"
+
+        - id: RevLevel
+          type: String
+          data: "1"
+
+        - id: PartNum
+          type: String
+          data: "QEMU"
+
+        - id: Date
+          type: String
+          data: "2020-05-10"
+
+
+# Function resource
+- id: 0x80
+  type: ResourceList
+  resources:
+    - id: sRsrcType
+      type: RsrcType
+      data:
+        category: 0x3     # catDisplay
+        cType: 0x1        # typVideo
+        drSW: 0x1         # drSwApple
+        drHw: 0x1c        # drHwDAFB
+
+    - id: sRsrcName
+      type: String
+      data: "Display_Video_Apple_DAFB"
+
+    - id: MinorBaseOS
+      type: Long
+      data: 0xf9001000
+
+    - id: MinorLength
+      type: Long
+      data: 0x100000
+
+    - id: 0x80            # FirstVidMode (8-bit, 800 x 600)
+      type: ResourceList
+      resources:
+        - id: 0x1
+          type: VidParams
+          data:
+            bytesPerRow: 800
+            hres: 800
+            vres: 600
+            pixelType: 0   # Indirect
+            pixelSize: 8
+            cmpCount: 1
+            cmpSize: 8
